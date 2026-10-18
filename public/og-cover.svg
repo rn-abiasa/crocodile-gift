@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- OG COVER 1200x630. Edit teks/warna di sini. Bunting = 13 bendera (HAPPYBIRTHDAY) di sepanjang tali. -->
+  <defs>
+    <pattern id="denim" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="2" height="8" fill="#24344d" opacity=".05"/></pattern>
+    <path id="flag" d="M-40 0H40L0 100Z" stroke="#24344d" stroke-width="3" stroke-linejoin="round"/>
+    <path id="star" d="M0-12l3.5 8 8.5.8-6.5 5.6 2 8.4L0 6.5l-7.5 4.3 2-8.4L-12-3.2l8.5-.8z" stroke="#24344d" stroke-width="1.6" stroke-linejoin="round"/>
+  </defs>
+  <rect width="1200" height="630" fill="#e8eef4"/>
+  <rect width="1200" height="630" fill="url(#denim)"/>
+
+  <!-- Tali bunting -->
+  <path d="M-20 30Q600 170 1220 30" fill="none" stroke="#24344d" stroke-width="4"/>
+
+  <!-- Bendera: posisi (translate) & kemiringan (rotate) mengikuti lengkung tali -->
+  <g font-family="DM Serif Display, Georgia, serif" font-size="46" fill="#24344d" text-anchor="middle">
+    <g transform="translate(62 47) rotate(11.1)"><use href="#flag" fill="#f3c94f"/><text y="52">H</text></g>
+    <g transform="translate(152 63) rotate(9.3)"><use href="#flag" fill="#f2a98c"/><text y="52">A</text></g>
+    <g transform="translate(241 77) rotate(7.4)"><use href="#flag" fill="#a9bfa8"/><text y="52">P</text></g>
+    <g transform="translate(331 87) rotate(5.6)"><use href="#flag" fill="#fbfaf5"/><text y="52">P</text></g>
+    <g transform="translate(421 94) rotate(3.7)"><use href="#flag" fill="#f3c94f"/><text y="52">Y</text></g>
+    <g transform="translate(510 99) rotate(1.9)"><use href="#flag" fill="#f2a98c"/><text y="52">B</text></g>
+    <g transform="translate(600 100)"><use href="#flag" fill="#a9bfa8"/><text y="52">I</text></g>
+    <g transform="translate(690 99) rotate(-1.9)"><use href="#flag" fill="#fbfaf5"/><text y="52">R</text></g>
+    <g transform="translate(779 94) rotate(-3.7)"><use href="#flag" fill="#f3c94f"/><text y="52">T</text></g>
+    <g transform="translate(869 87) rotate(-5.6)"><use href="#flag" fill="#f2a98c"/><text y="52">H</text></g>
+    <g transform="translate(959 77) rotate(-7.4)"><use href="#flag" fill="#a9bfa8"/><text y="52">D</text></g>
+    <g transform="translate(1048 63) rotate(-9.3)"><use href="#flag" fill="#fbfaf5"/><text y="52">A</text></g>
+    <g transform="translate(1138 47) rotate(-11.1)"><use href="#flag" fill="#f3c94f"/><text y="52">Y</text></g>
+  </g>
+
+  <!-- Teks utama -->
+  <text x="600" y="420" text-anchor="middle" font-family="DM Serif Display, Georgia, serif" font-style="italic" font-size="92" fill="#24344d">a little gift for you</text>
+  <text x="600" y="490" text-anchor="middle" font-family="Gaegu, Comic Sans MS, cursive" font-size="40" fill="#24344d">open this to see your surprise</text>
+
+  <!-- Bintang dekorasi -->
+  <use href="#star" transform="translate(130 360) scale(2.2)" fill="#f3c94f"/>
+  <use href="#star" transform="translate(1080 340) scale(1.8)" fill="#f2a98c"/>
+  <use href="#star" transform="translate(200 540) scale(1.3)" fill="#a9bfa8"/>
+  <use href="#star" transform="translate(1010 545) scale(2)" fill="#f3c94f"/>
+  <use href="#star" transform="translate(1120 470)" fill="#a9bfa8"/>
+</svg>
