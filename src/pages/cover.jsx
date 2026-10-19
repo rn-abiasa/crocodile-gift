@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useGo, Star } from "../components/ui";
 
-import head from "../assets/sella_with_sketch_hat.webp";
+import head from "../assets/angga.webp";
 
 // COVER: splash amplop -> judul -> umur (2 [kepala] 0) -> tombol. Edit teks langsung di sini.
 export default function Cover() {
@@ -40,7 +40,7 @@ export default function Cover() {
 
         {/* Umur: angka 2 + foto kepala + angka 0. Ganti angka di sini */}
         <div
-          className="in flex items-end justify-center -my-2"
+          className="relative in flex items-end justify-center gap-18 -my-2"
           style={{ "--d": "0.6s" }}
           aria-label="20 tahun"
         >
@@ -48,7 +48,7 @@ export default function Cover() {
           <img
             src={head}
             alt=""
-            className="idle w-28 -mx-1 mb-2"
+            className="absolute -bottom-14 idle w-80 -mx-1 mb-2"
             style={{ "--r": "-4deg" }}
           />
           <span className="font-script text-[8rem] leading-[0.8]">0</span>
