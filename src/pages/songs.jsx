@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { BackButton, Star } from "../components/ui";
+import photoA from "../assets/2.webp"; // foto polaroid kiri (ganti sesuai selera)
+import photoB from "../assets/7.webp"; // foto polaroid kanan
 
 // SONGS: radio dengan layar kecil (YouTube) + piringan vinyl, judul/artist, dan tombol play.
 // Ganti 3 nilai ini sesuai lagu kalian (ID = bagian setelah "v=" di URL YouTube).
@@ -64,9 +66,20 @@ export default function Songs() {
 
       {/* Badan radio */}
       <div
-        className="in relative w-full bg-sage rounded-3xl border-[3px] border-ink p-4"
+        className="in relative w-full bg-sage rounded-3xl border-[3px] border-ink p-4 mb-24"
         style={{ "--d": "0.3s", boxShadow: "5px 6px 0 var(--color-ink)" }}
       >
+        {/* Dua polaroid di sudut bawah radio (mb-24 di atas memberi ruang untuk keduanya) */}
+        <div className="polaroid idle absolute -bottom-[6.4rem] -left-3 w-24 z-10" style={{ "--r": "-9deg", "--d": "0.4s" }}>
+          <span className="tape -top-2 left-1/2 -translate-x-1/2 !w-10 !h-4 rotate-3" />
+          <img src={photoA} alt="" />
+          <span className="absolute bottom-0.5 inset-x-0 text-center text-sm">us ♡</span>
+        </div>
+        <div className="polaroid idle absolute -bottom-[6.4rem] -right-3 w-24 z-10" style={{ "--r": "8deg", "--d": "1s" }}>
+          <span className="tape -top-2 left-1/2 -translate-x-1/2 !w-10 !h-4 -rotate-3" />
+          <img src={photoB} alt="" />
+          <span className="absolute bottom-0.5 inset-x-0 text-center text-sm">forever ♡</span>
+        </div>
         {/* Antena */}
         <span className="absolute -top-10 right-10 w-1 h-12 bg-ink rotate-[18deg] origin-bottom" />
         {/* Layar kecil: video YouTube */}

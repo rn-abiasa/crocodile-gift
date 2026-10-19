@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useGo, Star } from "../components/ui";
 
+import { Confetti } from "../components/fx";
 import head from "../assets/angga.webp";
 
 // COVER: splash amplop -> judul -> umur (2 [kepala] 0) -> tombol. Edit teks langsung di sini.
@@ -9,6 +10,8 @@ export default function Cover() {
 
   return (
     <>
+      {/* Confetti popper meledak ringan saat web dibuka */}
+      <Confetti />
       <main className="page justify-center text-center overflow-hidden">
         {/* Bintang dekorasi: ubah posisi/ukuran/warna sesuai selera */}
         <Star className="top-8 left-5" size={34} d={0} />

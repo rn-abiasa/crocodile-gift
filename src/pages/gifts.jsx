@@ -131,6 +131,10 @@ const gifts = [
   },
 ];
 
+// Karakter gerak idle tiap gift (urut sesuai daftar gifts): miring, berdetak, berayun, melompat.
+// Kelasnya ada di components/fx.css
+const idles = ["idle-tilt", "idle-beat", "idle-sway", "idle-hop"];
+
 export default function Gifts() {
   const go = useGo();
   return (
@@ -160,17 +164,20 @@ export default function Gifts() {
         {gifts.map((g, i) => (
           <button
             key={g.to}
-            className="tile in text-center bg-transparent border-0 cursor-pointer text-ink"
-            style={{ "--d": `${0.25 + i * 0.15}s` }}
+            className="tile swing-in text-center bg-transparent border-0 cursor-pointer text-ink"
+            style={{ "--d": `${0.25 + i * 0.15}s`, "--s": i % 2 ? -1 : 1 }}
             onClick={() => go(g.to)}
           >
             <div
-              className="idle relative grid place-items-center size-28 mx-auto"
+              className={`${idles[i % idles.length]} relative grid place-items-center size-28 mx-auto`}
               style={{ "--r": `${g.rot}deg`, "--d": `${i * 0.5}s` }}
             >
+              {/* Hati kecil yang naik dari kartu */}
+              <span className="mini-heart z-10" style={{ "--d": `${i * 0.8}s` }}>♥</span>
+              <span className="mini-heart z-10 !right-auto !left-1 !text-sm" style={{ "--d": `${i * 0.8 + 1.5}s` }}>♥</span>
               {/* Blob warna di belakang ilustrasi */}
               <span
-                className="absolute inset-0 border-2 border-dashed border-ink"
+                className="blob-morph absolute inset-0 border-2 border-dashed border-ink"
                 style={{
                   background: g.blob,
                   borderRadius: "58% 42% 55% 45% / 48% 56% 44% 52%",

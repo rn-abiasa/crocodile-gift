@@ -1,0 +1,57 @@
+/* ============ FX: confetti popper, hati melayang, animasi in/idle tambahan ============
+   Semua CSS murni (tanpa JS animasi). Reduce-motion sengaja tidak mematikan animasi. */
+
+/* ---------- CONFETTI POPPER ----------
+   .cf (luar) bergerak horizontal linear; <i> (dalam) bergerak vertikal: naik cepat (ease-out)
+   lalu jatuh (ease-in) = efek gravitasi tanpa JS. Nilai --x/--up/--down/--rot diacak di fx.jsx. */
+.confetti-layer { position: fixed; inset: 0; pointer-events: none; z-index: 60; overflow: hidden; }
+.cf { position: absolute; bottom: 0; left: var(--ox); width: 0; height: 0;
+      animation: cf-x var(--t) linear both; animation-delay: var(--dl); }
+.cf > i { position: absolute; display: block; width: var(--w); height: var(--h); background: var(--c);
+          border-radius: var(--br); animation: cf-y var(--t) both; animation-delay: var(--dl); }
+.cf > i.cf-h { background: none; color: var(--c); width: auto; height: auto; font-size: var(--w); line-height: 1; font-style: normal; }
+@keyframes cf-x { to { transform: translateX(var(--x)); } }
+@keyframes cf-y {
+  0%   { transform: translateY(0) rotate(0); opacity: 1; animation-timing-function: cubic-bezier(.1,.7,.3,1); }
+  40%  { transform: translateY(var(--up)) rotate(calc(var(--rot) * .5)); animation-timing-function: cubic-bezier(.5,0,.9,.6); }
+  85%  { opacity: 1; }
+  100% { transform: translateY(var(--down)) rotate(var(--rot)); opacity: 0; }
+}
+
+/* ---------- HATI MELAYANG (latar semua halaman) ---------- */
+.fh { position: fixed; bottom: -2rem; left: var(--l); font-size: var(--s); color: var(--c); opacity: 0;
+      pointer-events: none; z-index: 0; line-height: 1; animation: fh-rise var(--t) linear infinite; animation-delay: var(--dl); }
+@keyframes fh-rise {
+  0%   { transform: translate(0, 0) rotate(-10deg) scale(.8); opacity: 0; }
+  10%  { opacity: .55; }
+  50%  { transform: translate(var(--sw), -55vh) rotate(10deg) scale(1); }
+  90%  { opacity: .4; }
+  100% { transform: translate(calc(var(--sw) * -1), -115vh) rotate(-8deg) scale(1.1); opacity: 0; }
+}
+
+/* ---------- IN: kartu menggantung lalu berayun (halaman gifts) ----------
+   --s = 1 / -1 mengatur arah ayunan awal (selang-seling antar kartu). */
+@keyframes swing-in {
+  0%   { opacity: 0; transform: translateY(-70px) rotate(calc(var(--s, 1) * 28deg)); }
+  55%  { opacity: 1; transform: translateY(6px) rotate(calc(var(--s, 1) * -9deg)); }
+  75%  { transform: translateY(-3px) rotate(calc(var(--s, 1) * 4deg)); }
+  100% { opacity: 1; transform: none; }
+}
+.swing-in { transform-origin: 50% 0; animation: swing-in .95s cubic-bezier(.3,.7,.4,1) both; animation-delay: var(--d, 0s); }
+
+/* ---------- IDLE: tiap gift punya karakter gerak sendiri ---------- */
+@keyframes idle-tilt  { 0%,100% { transform: rotate(var(--r)) translateY(0); } 30% { transform: rotate(calc(var(--r) - 6deg)) translateY(-6px); } 60% { transform: rotate(calc(var(--r) + 5deg)) translateY(-2px); } }
+@keyframes idle-beat  { 0%,100% { transform: rotate(var(--r)) scale(1); } 15% { transform: rotate(var(--r)) scale(1.1); } 30% { transform: rotate(var(--r)) scale(.96); } 45% { transform: rotate(var(--r)) scale(1.06); } }
+@keyframes idle-sway  { 0%,100% { transform: rotate(calc(var(--r) - 8deg)); } 50% { transform: rotate(calc(var(--r) + 8deg)); } }
+@keyframes idle-hop   { 0%,70%,100% { transform: rotate(var(--r)) translateY(0) scale(1); } 80% { transform: rotate(var(--r)) translateY(-12px) scale(1.04, .96); } 90% { transform: rotate(var(--r)) translateY(0) scale(.96, 1.04); } }
+.idle-tilt { animation: idle-tilt 3.6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.idle-beat { animation: idle-beat 1.4s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.idle-sway { transform-origin: 50% 0; animation: idle-sway 3.2s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.idle-hop  { animation: idle-hop 2.6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+
+/* Blob "bernapas" + hati kecil yang naik dari tiap kartu */
+@keyframes morph { 0%,100% { border-radius: 58% 42% 55% 45% / 48% 56% 44% 52%; } 50% { border-radius: 44% 56% 42% 58% / 56% 44% 56% 44%; } }
+.blob-morph { animation: morph 6s ease-in-out infinite; }
+@keyframes mh { 0% { opacity: 0; transform: translateY(8px) scale(.5); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(-36px) translateX(10px) scale(1.1) rotate(15deg); } }
+.mini-heart { position: absolute; top: 0; right: .3rem; color: #f08aa6; font-size: 1.1rem; line-height: 1; opacity: 0;
+              animation: mh 3s ease-out infinite; animation-delay: var(--d, 0s); }

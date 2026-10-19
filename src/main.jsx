@@ -9,6 +9,7 @@ import Message from "./pages/message";
 import Songs from "./pages/songs";
 import Memories from "./pages/memories";
 import Photobooth from "./pages/photobooth";
+import { FloatingHearts } from "./components/fx";
 
 // Satu route per halaman di flow: cover -> gifts -> (message | songs | memories | photobooth)
 const router = createBrowserRouter([
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    <FloatingHearts />
     <RouterProvider router={router} />
   </StrictMode>,
 );
