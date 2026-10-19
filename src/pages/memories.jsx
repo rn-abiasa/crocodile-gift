@@ -45,10 +45,14 @@ export default function Memories() {
     dialog.current.showModal();
   };
 
+  // Pindah foto di dialog (berputar: setelah foto terakhir kembali ke foto pertama)
+  const total = heart.join("").replaceAll(".", "").length;
+  const step = (d) => setOpen((o) => (o + d + total) % total);
+
   return (
     <main className="page">
       <Star className="top-6 left-5" size={22} color="var(--color-sage)" />
-      <h1 className="in font-script italic text-3xl mt-4">
+      <h1 className="in font-script italic text-3xl mt-16 md:mt-32">
         our little memories
       </h1>
 
@@ -88,17 +92,34 @@ export default function Memories() {
       {/* Dialog detail foto. Klik area gelap di luar kartu untuk menutup. */}
       <dialog
         ref={dialog}
-        className="m-auto bg-transparent p-0 border-0 max-w-[90vw] backdrop:bg-ink/60 backdrop:backdrop-blur-sm"
+        /* overflow-visible + p-5: kartu miring, tape, dan tombol tutup tidak memicu scrollbar */
+        className="m-auto bg-transparent p-5 border-0 overflow-visible max-w-none max-h-none backdrop:bg-ink/60 backdrop:backdrop-blur-sm"
         onClick={(e) => e.target === dialog.current && dialog.current.close()}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowLeft") step(-1);
+          if (e.key === "ArrowRight") step(1);
+        }}
         onClose={() => setOpen(null)}
       >
         {open !== null && (
-          <div className="in polaroid relative w-72 max-w-full !p-3 !pb-5 -rotate-2 text-ink">
+          /* key={open}: animasi "in" diulang setiap pindah foto */
+          <div key={open} className="in polaroid relative w-[min(20rem,82vw)] !p-3 !pb-4 -rotate-2 text-ink">
             <span className="tape -top-3 left-1/2 -translate-x-1/2 rotate-3" />
             <img src={photos[open % photos.length]} alt={captions[open]} />
-            <p className="text-center text-2xl mt-3 leading-tight">
+            <p className="text-center text-2xl mt-3 leading-tight min-h-[2.4em] grid place-items-center">
               {captions[open]}
             </p>
+
+            {/* Navigasi foto: prev, nomor, next */}
+            <div className="flex items-center justify-between mt-2">
+              <button className="btn ghost !px-3 !py-1" aria-label="foto sebelumnya" onClick={() => step(-1)}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+              </button>
+              <span className="text-xl">{open + 1} / {total}</span>
+              <button className="btn ghost !px-3 !py-1" aria-label="foto berikutnya" onClick={() => step(1)}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </button>
+            </div>
             <button
               className="btn ghost !px-3 !py-1 absolute -top-3 -right-3"
               aria-label="tutup"

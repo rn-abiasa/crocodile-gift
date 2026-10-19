@@ -58,7 +58,9 @@ export default function Songs() {
   return (
     <main className="page">
       <Star className="top-8 left-6" size={24} color="var(--color-peach)" />
-      <h1 className="in font-script italic text-3xl mt-4">a song for you</h1>
+      <h1 className="in font-script italic text-3xl mt-16 md:mt-32">
+        a song for you
+      </h1>
 
       {/* Badan radio */}
       <div
